@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (count > 0) {
+      document.querySelector("#value").style.color = "green";
+    } else if (count < 0) {
+      document.querySelector("#value").style.color = "red";
+    } else {
+      document.querySelector("#value").style.color = "black";
+    }
+  }, [count]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="container">
+      <h1>Counter</h1>
+      <span id="value">{count}</span>
+      <div className="btn-group">
+        <button
+          className="btn btn-decrease"
+          onClick={() => setCount((i) => i - 1)}
         >
-          Learn React
-        </a>
-      </header>
+          DECREASE
+        </button>
+        <button className="btn btn-reset" onClick={() => setCount(0)}>
+          RESET
+        </button>
+        <button
+          className="btn btn-increase"
+          onClick={() => setCount((i) => i + 1)}
+        >
+          INCREASE
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
